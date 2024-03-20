@@ -56,6 +56,15 @@ void reverseText(FILE *inputFile, FILE *outputFile, bool *isFile){
 
 //Funcion principal
 int main(int argc, char *argv[]) {
+
+    // Verifica que se haya ingresado el archivo de entrada y no haya demasiados argumentos
+    if (argc < 2 || argc > 3) {
+        // Imprime mensaje de error
+        fprintf(stderr, "usage: reverse <input> <output>\n");
+        // Devuelve 1 para indicar un error en los argumentos
+        return 1;
+    }
+
     //Verifica que se haya ingresado el archivo de entrada
     if (argc < 2) {
         //Imprime mensade error
@@ -65,9 +74,9 @@ int main(int argc, char *argv[]) {
     }
     //Abre el archivo de entrada especificado en el primer argumento, en modo de lectura
     FILE *inputFile = fopen(argv[1], "r");
-    //
+    //Error abriendo el archvivo
     if (inputFile == NULL) {
-        perror("Error abriendo el archivo");
+        fprintf(stderr, "reverse: cannot open file '/no/such/file.txt'\n");
         return 1;
     }
 
